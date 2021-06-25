@@ -48,7 +48,7 @@ int main(){
             x = (int)(faces[0].br().x - (faces[0].width + tie.cols) / 2);
             y = faces[0].br().y + 20;
 
-            if (y < (src_img.rows - tie.rows - 20)){ // make shure bottom edge is still in the webcam frame
+            if ((y < (src_img.rows - tie.rows - 20)) && (x > 0)){ // only show the picture, if all edges are in the frame
                 roi = src_img(Rect(x,y,tie.cols, tie.rows));
 
                 for (int r = 0; r < roi.rows; r++){
@@ -66,9 +66,9 @@ int main(){
 
             //Hat
             x = (int)(faces[0].tl().x + (faces[0].width - hat.cols) / 2 + 20); 
-            y = (int)(faces[0].tl().y - hat.rows + 40);
+            y = (int)(faces[0].tl().y - hat.rows + 30);
 
-            if (y > 0){ // make shure top edge is still in the webcam frame
+            if ((y > 0) && (x < src_img.cols - hat.cols - 30)){ // only show the picture, if all edges are in the frame
                 roi = src_img(Rect(x, y, hat.cols, hat.rows));
 
                 for (int r = 0; r < roi.rows; r++){
